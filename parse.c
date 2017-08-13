@@ -30,9 +30,9 @@ char ** split_space(char * line, int str_len) {
         for (int i = 0; i <= last_idx; i++) {
             cmd_name[i] = line[i];
         }
-        cmd_name[last_idx + 1] = '\0';
+        cmd_name[last_idx + 1] = NULL;
         
-        ptr[insert_idx++] = &cmd_name;
+        ptr[insert_idx++] = cmd_name;
         
         /*mark space char*/
         cp_str[last_idx+1] = 'o';
@@ -58,7 +58,7 @@ char ** split_space(char * line, int str_len) {
             for (int i = start_idx; i <= last_idx; i++) {
                 param[tmp_idx++] = line[i];
             }
-            param[tmp_idx] = '\0';
+            param[tmp_idx] = NULL;
             /*Eliminate quotation mark if exist*/
             if (param[0] == '\'' && param[strlen(param)-1] == '\'')
             {
@@ -66,10 +66,10 @@ char ** split_space(char * line, int str_len) {
                 int i = 0;
                 for (i = 0; i <= strlen(param)-1; i++)
                     param[i] = param[i+1];
-                param[i-2] = '\0';
+                param[i-2] = NULL;
                 //printf("param : %s\n",param);
             }
-            ptr[insert_idx++] = &param;
+            ptr[insert_idx++] = param;
             if (is_end == 0)
                 cp_str[last_idx+1] = 'o';
         }
@@ -77,13 +77,13 @@ char ** split_space(char * line, int str_len) {
     /*In case of command with no parameter*/
     else{
         strcpy(cmd_name,line);
-        ptr[0] = &cmd_name;
+        ptr[0] = cmd_name;
         ptr[1] = NULL;
-        return *ptr;
+        return ptr;
     }
     
     ptr[insert_idx] = NULL;
-    return *ptr;
+    return ptr;
 }
 
 int calc_num_of_cmd(char * line) {
@@ -103,7 +103,7 @@ char * slice_str(char * line, int start, int end) {
     for (int i = start; i <= end; i++) {
         temp[insert_idx++] = line[i];
     }
-    temp[insert_idx] = '\0';
+    temp[insert_idx] = NULL;
     return temp;
 }
 
@@ -112,7 +112,7 @@ char *** parse_cmd(char * line){
     int num_of_cmd = calc_num_of_cmd(line);
     //printf("line : %s\n",line);
     //printf("num_of_cmd : %d\n",num_of_cmd);
-    char *** temp_split_cmd = (char ***)malloc(sizeof(char **)*num_of_cmd);
+    char *** temp_split_cmd = (char **)malloc(sizeof(char **)*num_of_cmd);
     int start_index = 0;
     int cmd_insert_idx = 0;
     int pipe_index;
@@ -127,7 +127,7 @@ char *** parse_cmd(char * line){
         for (int i = start_index; i <= end_of_cmd_index; i++) {
             temp[tmp_insert_idx++] = line[i];
         }
-        temp[tmp_insert_idx] = '\0';
+        temp[tmp_insert_idx] = NULL;
         
         /*add cmd list to array*/
         temp_split_cmd[cmd_insert_idx++] = split_space(temp, strlen(temp));
