@@ -49,7 +49,7 @@ int main(int argc, char * argv[]) {
     for (int i = 0; i < command_str_len; i++){
         command_str[i] = argv[argc-1][i];
     }
-    command_str[command_str_len] = NULL;
+    command_str[command_str_len] = '\0';
     
     /*parse command string */
     num_of_cmd = calc_num_of_cmd(command_str);

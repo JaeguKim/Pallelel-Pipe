@@ -31,7 +31,7 @@ typedef struct THREAD_PARAM{
 
 typedef struct command
 {
-    const char **argv;
+    char **argv;
 }command;
 
 void * thread_exec(void *p);
