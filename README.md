@@ -8,9 +8,9 @@ Papi프로젝트에서는 대용량의 텍스트 파일을 병렬적으로 처�
 * 데이터 입력 방식   
 데이터는 papi로 standard in을 통해서 들어온다. 따라서, papi는 전체 데이터의 크기를 알 수 없다. 계속 데이터가 입력이 될때 마다 처리를 해야하는 stream processing 방식으로 구현되어야 한다. 데이터를 모두 받아서 파일로 저장했다가 n등분하여 각 thread로 처리하는 방법은 틀린 구현방식이다.
  
-Papi 개념도
-
-
+* Papi 개념도   
+![summary](summary.png)
+   
 * Papi 사용 형태   
 Papi를 사용하는 방식은 다음의 예와 같다.   
 $ cat largefile.txt | ./papi -c 4 "grep blackhole == sed 's/the//g' == wc -l"   
